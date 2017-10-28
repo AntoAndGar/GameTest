@@ -1,6 +1,7 @@
 /*
- 1- prima mappa grafica E
- 2- programmare movimento cosino A
- 3- far partire la WebApp A
- 3- bho...
+ 1- prima mappa grafica E -
+ 2- programmare movimento cosino A -
+ 3- far partire la WebApp A -----☻
+ 4- bho...
+ 
 */
