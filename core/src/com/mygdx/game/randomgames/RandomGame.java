@@ -44,6 +44,7 @@ public class RandomGame extends Game//extends ApplicationAdapter
 	@Override
 	public void dispose() 
 	{
+		//vaffangala
 		_mainGameScreen.dispose();
 		batch.dispose();
 		font.dispose();
