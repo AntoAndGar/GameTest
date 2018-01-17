@@ -1,3 +1,6 @@
+Attualmente funziona ma va in errore perchè non trova il file per il font
+della scritta (aggiungere a todo)
+
 http://localhost:8080/html/  local server
 
 http://127.0.0.1:9876/ local server Dev Mode
