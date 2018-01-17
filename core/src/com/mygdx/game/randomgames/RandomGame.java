@@ -9,6 +9,7 @@ import com.mygdx.game.randomgames.screens.MainGameScreen;
 
 public class RandomGame extends ApplicationAdapter 
 { // la madonnna è troia
+	//adsih
 	SpriteBatch batch;
 	Texture img;
 	
