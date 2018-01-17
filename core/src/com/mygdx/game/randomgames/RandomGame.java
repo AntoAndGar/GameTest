@@ -15,7 +15,7 @@ public class RandomGame extends Game//extends ApplicationAdapter
 { // la madonnna è troia
 	//adsih
   // gesù anche!
-  //e tutti i santi
+  
 	SpriteBatch batch;
 	Texture img;
 	BitmapFont font;
