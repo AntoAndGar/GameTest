@@ -12,6 +12,8 @@ import com.mygdx.game.randomgames.screens.MainGameScreen;
 
 public class RandomGame extends Game//extends ApplicationAdapter
 {
+	
+	// gesù anche!
 	SpriteBatch batch;
 	Texture img;
 	BitmapFont font;
