@@ -8,7 +8,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.mygdx.game.randomgames.screens.MainGameScreen;
 
 public class RandomGame extends ApplicationAdapter 
-{
+{ // la madonnna è troia
 	SpriteBatch batch;
 	Texture img;
 	
