@@ -12,10 +12,7 @@ import com.mygdx.game.randomgames.screens.MainGameScreen;
 
 
 public class RandomGame extends Game//extends ApplicationAdapter
-{ // la madonnna è troia
-	//adsih
-  // gesù anche!
-  
+{ 
 	SpriteBatch batch;
 	Texture img;
 	BitmapFont font;
@@ -46,7 +43,6 @@ public class RandomGame extends Game//extends ApplicationAdapter
 	@Override
 	public void dispose() 
 	{
-		//vaffangala
 		_mainGameScreen.dispose();
 		batch.dispose();
 		font.dispose();
