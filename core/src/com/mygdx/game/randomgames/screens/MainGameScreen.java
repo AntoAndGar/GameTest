@@ -2,6 +2,13 @@ package com.mygdx.game.randomgames.screens;
 
 import com.badlogic.gdx.Screen;
 
+/**
+ * Will be the primary gameplay screen that displays 
+ * the different maps and player character moving around in them.
+ * Will also create MapManager, Entity, and PlayerController.
+ * @author Anto
+ *
+ */
 public class MainGameScreen extends GameScreen implements Screen
 {
 	public void dispose() 
