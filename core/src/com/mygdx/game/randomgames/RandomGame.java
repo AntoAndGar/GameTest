@@ -10,13 +10,21 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.mygdx.game.randomgames.screens.MainGameScreen;
 
-
+/**
+ * Will maintain all the screens for the game.
+ * @author Anto
+ *
+ */
 public class RandomGame extends Game//extends ApplicationAdapter
 { 
 	SpriteBatch batch;
 	Texture img;
 	BitmapFont font;
 	
+	/**
+	 * The primary gameplay screen that the player will see as 
+	 * they move their hero around in the game world.
+	 */
 	public static final MainGameScreen _mainGameScreen = new MainGameScreen();
 	
 	@Override
