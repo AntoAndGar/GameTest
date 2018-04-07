@@ -6,6 +6,9 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.maps.MapLayer;
+import com.badlogic.gdx.maps.MapObject;
+import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.math.Rectangle;
 import com.mygdx.game.randomgames.Entity;
@@ -155,8 +158,8 @@ public class MainGameScreen extends GameScreen implements Screen
 	}
 	
 	/**
-	 * helps with the bookkeeping of our inner class 
-	 * VIEWPORT. This is simply a convenience class for maintaining all the parameters
+	 * Helps with the bookkeeping of our inner class VIEWPORT. 
+	 * This is simply a convenience class for maintaining all the parameters
 	 * that compose our viewport for the camera. This class will also account for the
 	 * skewing that can occur depending on the width to height ratio and will update
 	 * the values accordingly
@@ -196,7 +199,78 @@ public class MainGameScreen extends GameScreen implements Screen
 		Gdx.app.debug(TAG, "WorldRenderer: physical: (" + VIEWPORT.physicalWidth + "," + VIEWPORT.physicalHeight + ")" );
 	}
 	
+	/**
+	 * This method is called for every frame in the render()
+	 * method with the player character’s bounding box passed in. This is essentially the
+	 * rectangle that defines the hitbox of the player. We test the player’s hitbox against
+	 * all rectangle objects on the collision layer of the TiledMap map, and if any of the
+	 * rectangles overlap, then we know we have a collision and will return true
+	 * @param boundingBox
+	 * @return bool
+	 */
 	private boolean isCollisionWithMapLayer(Rectangle boundingBox) {
-		//TODO: implementig missing stuff
+		MapLayer mapCollisionLayer = _mapMgr.getCollisionLayer();
+		if( mapCollisionLayer == null ){
+			return false;
+		}
+		
+		Rectangle rectangle = null;
+		
+		for( MapObject object : mapCollisionLayer.getObjects() ) {
+			if(object instanceof RectangleMapObject) {
+				rectangle = ((RectangleMapObject)object).getRectangle();
+				if( boundingBox.overlaps(rectangle) ){
+					return true;
+				}
+			}
+		}
+		
+		return false;
 	}
+	
+	/**
+	 * The method is similar to the isCollisionWithMapLayer(),
+	 *  in that we will walk through every rectangle on the
+	 *  portal layer checking for collisions with the player’s hitbox. The primary difference
+	 *  is that if a player walks over these special areas on the map, then an event will be
+	 *  triggered letting us know that the player has activated the portal. When portal
+	 *  activation occurs, we will first cache the closest player spawn in the MapManager
+	 *  class. This will help when we transition out from the new location, back to the current
+	 *  location. Then, we will load the new map designated by the portal activation name,
+	 *  reset the player position, and set the new map to be rendered in the next frame.
+	 * @param boundingBox
+	 * @return
+	 */
+	private boolean updatePortalLayerActivation( Rectangle boundingBox) {
+		MapLayer mapPortalLayer = _mapMgr.getPortalLayer();
+		
+		if( mapPortalLayer == null ) {
+			return false;
+		}
+		
+		Rectangle rectangle = null;
+		
+		for( MapObject object : mapPortalLayer.getObjects() ) {
+			if(object instanceof RectangleMapObject ) {
+				rectangle = ((RectangleMapObject)object).getRectangle();
+				if( boundingBox.overlaps(rectangle) ) {
+					String mapName = object.getName();
+					if( mapName == null ) {
+						return false;
+					}
+					_mapMgr.setClosestStartPositionFromScaledUnits(_player.getCurrentPosition());
+					_mapMgr.loadMap(mapName);
+					_player.init(_mapMgr.getPlayerStartUnitScaled().x,
+							_mapMgr.getPlayerStartUnitScaled.y);
+					_mapRenderer.setMap(_mapMgr.getCurrentMap());
+					Gdx.app.debug(TAG, "Portal Activated");
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+	
+	
+	
 }

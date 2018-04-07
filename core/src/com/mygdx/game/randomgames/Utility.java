@@ -70,7 +70,7 @@ public final class Utility {
 	 * @param fileName
 	 * @return the asset is currently loaded or not
 	 */
-	public boolean isAssetLoaded(String fileName) {
+	public static boolean isAssetLoaded(String fileName) {
 		return _assetManager.isLoaded(fileName);
 		
 	}
@@ -106,7 +106,7 @@ public final class Utility {
 	 * @param mapFilenamePath
 	 * @return the asset
 	 */
-	public TiledMap getMapAsset(String mapFilenamePath) {
+	public static TiledMap getMapAsset(String mapFilenamePath) {
 		TiledMap map = null;
 		
 		if(_assetManager.isLoaded(mapFilenamePath) ) 
