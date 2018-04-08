@@ -122,7 +122,7 @@ public final class Utility {
 	 * working directory and load the image file as a Texture asset, blocking until finished.
 	 * @param textureFilenamePath
 	 */
-	public void loadTextureAsset(String textureFilenamePath) {
+	public static void loadTextureAsset(String textureFilenamePath) {
 		if( textureFilenamePath == null || textureFilenamePath.isEmpty() )
 			return;
 		
@@ -144,7 +144,7 @@ public final class Utility {
 	 * @param textureFilenamePath
 	 * @return the asset
 	 */
-	public Texture getTextureAsset(String textureFilenamePath) {
+	public static Texture getTextureAsset(String textureFilenamePath) {
 		Texture texture = null;
 		
 		if( _assetManager.isLoaded(textureFilenamePath) ) 
