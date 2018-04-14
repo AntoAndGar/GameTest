@@ -3,7 +3,7 @@ package com.mygdx.game.randomgames;
 import com.badlogic.gdx.InputProcessor;
 
 /**
- * Will be the class that controls the player’s input and controls on the screen.
+ * Will be the class that controls the player's input and controls on the screen.
  * @author Anto
  *
  */

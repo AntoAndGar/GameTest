@@ -163,8 +163,8 @@ public class MapManager {
 	 * the player on the current map. This is used when the portal activation occurs in order
 	 * to start the player in the correct location when transitioning out of the new location,
 	 * back to the previous location. For instance, there are two player start locations on the
-	 * TOP_WORLD map. One player’s start spawn is near the village represented by the TOWN
-	 * map, and the other one is outside the enemy’s castle, represented by the CASTLE_OF_
+	 * TOP_WORLD map. One player's start spawn is near the village represented by the TOWN
+	 * map, and the other one is outside the enemy's castle, represented by the CASTLE_OF_
 	 * DOOM map. In order to resolve the ambiguity of which player start location we should
 	 * choose, we call this method when we are transitioning to another location. So, if you
 	 * enter the enemy castle and then leave, you will start at the player start spawn outside
