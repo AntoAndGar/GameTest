@@ -5,6 +5,7 @@ import java.util.Hashtable;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.maps.MapLayer;
 import com.badlogic.gdx.maps.MapObject;
+import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.math.Vector2;
 
@@ -44,18 +45,18 @@ public class MapManager {
 	private MapLayer _collisionLayer = null;
 	private MapLayer _portalLayer = null;
 	private MapLayer _spawnsLayer = null;
-	
+
 	public static final float UNIT_SCALE = 1/16f;
 	
 	public MapManager() {
 		_playerStart = new Vector2(0,0);
-		_mapTable = new Hashtable();
+		_mapTable = new Hashtable<String, String>();
 		
 		_mapTable.put(TOP_WORLD, "maps/topworld.tmx");
 		_mapTable.put(TOWN, "maps/town.tmx");
 		_mapTable.put(CASTLE_OF_DOOM, "maps/castle_of_doom.tmx");
 		
-		_playerStartLocationTable = new Hashtable();
+		_playerStartLocationTable = new Hashtable<String, Vector2>();
 		_playerStartLocationTable.put(TOP_WORLD, _playerStart.cpy());
 		_playerStartLocationTable.put(TOWN, _playerStart.cpy());
 		_playerStartLocationTable.put(CASTLE_OF_DOOM, _playerStart.cpy());
@@ -172,7 +173,7 @@ public class MapManager {
 	 * closest to your location at that time
 	 * @param position
 	 */
-	private void setClosestStartPosition(Vector2 position) {
+	private void setClosestStartPosition(final Vector2 position) {
 		//Get last know position on this map
 		_playerStartPositionRect.set(0,0);
 		_closestPlayerStartPosition.set(0,0);
@@ -200,12 +201,10 @@ public class MapManager {
 	 * location back into pixel coordinate space used in the map.
 	 * @param position
 	 */
-	public void setClosestPositionFromScaledUnits(Vector2 position) {
-		if( UNIT_SCALE <= 0 ) {
+	public void setClosestStartPositionFromScaledUnits(Vector2 position) {
+		if (UNIT_SCALE <= 0)
 			return;
-		}
-		
-		_convertedUnits.set(position.x/UNIT_SCALE, position.y/UNIT_SCALE);
+		_convertedUnits.set(position.x / UNIT_SCALE, position.y / UNIT_SCALE);
 		setClosestStartPosition(_convertedUnits);
-		}
+	}
 }

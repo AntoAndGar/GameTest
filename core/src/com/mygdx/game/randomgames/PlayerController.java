@@ -9,6 +9,10 @@ import com.badlogic.gdx.InputProcessor;
  */
 public class PlayerController implements InputProcessor {
 
+	public PlayerController(Entity _player) {
+		// TODO Auto-generated constructor stub
+	}
+
 	@Override
 	public boolean keyDown(int keycode) {
 		// TODO Auto-generated method stub
@@ -55,6 +59,16 @@ public class PlayerController implements InputProcessor {
 	public boolean scrolled(int amount) {
 		// TODO Auto-generated method stub
 		return false;
+	}
+
+	public void update(float delta) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void dispose() {
+		// TODO Auto-generated method stub
+		
 	}
 
 }
