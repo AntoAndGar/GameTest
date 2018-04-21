@@ -2,6 +2,7 @@ package com.mygdx.game.randomgames.screens;
 
 import com.badlogic.gdx.math.Vector2;
 
+import java.util.Arrays;
 import java.util.Iterator;
 import java.util.LinkedList;
 
@@ -53,7 +54,6 @@ public class DragonCurveGenerator {
             }
 
         }
-        System.out.print(turns);
         return turns;
     }
 
@@ -71,9 +71,10 @@ public class DragonCurveGenerator {
     public static float[] generateDragonCurve(int width, int height, int recursions){
 
         LinkedList<Direction> turns = DragonCurveGenerator.dragonTurns(recursions);
+        System.out.println(turns);
 
         Vector2 head = new Vector2(width/2, height/2);
-        Vector2 heading = new Vector2(5, 0);
+        Vector2 heading = new Vector2(10, 0);
 
         float[] curve = new float[(turns.size() + 1) * 2];
 
@@ -82,10 +83,12 @@ public class DragonCurveGenerator {
         curve[i++] = head.y;
 
         //TODO: Convert the list of turns into the actual path
-        for(Direction dir : turns) {
-            Vector2 vect = Direction.turn(heading, dir);
-            curve[i++] = vect.x;
-            curve[i++] = vect.y;
+        for (Direction turn : turns){
+            heading = Direction.turn(heading, turn);
+            head.x += heading.x;
+            head.y += heading.y;
+            curve[i++] = head.x;
+            curve[i++] = head.y;
         }
 
 
