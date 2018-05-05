@@ -77,7 +77,7 @@ public class Entity {
 	 * One of the states we need to maintain for smooth animation cycles is frameTime,
 	 * which is simply the accumulation of the deltas between frame updates. This allows
 	 * the animation to account for changes in the frame rate of the game. One quick
-	 * note is that depending on how long the game is playing, we don’t want to have a
+	 * note is that depending on how long the game is playing, we don't want to have a
 	 * value increasing for the entire lifetime of the game since there is the potential for an
 	 * overflow. One simple solution is to mod the value to 5, essentially resetting the
 	 * value every five seconds
@@ -279,7 +279,7 @@ public class Entity {
 	 * velocity value is too fast to be calculated in the current frame. By the time the next
 	 * frame checks the collision, the game objects have already passed through each other.
 	 * Basically, this method represents one technique to deal with collisions between two
-	 * moving objects in the game world. We are going to “look ahead” and predict what
+	 * moving objects in the game world. We are going to "look ahead" and predict what
 	 * the next position value will be by using our current velocity and the time to render
 	 * the last frame. By multiplying the current velocity vector, _velocity, and by the
 	 * deltaTime scalar quantity using the scl() method, we get a value that represents

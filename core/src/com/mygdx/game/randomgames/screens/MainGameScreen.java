@@ -86,7 +86,7 @@ public class MainGameScreen extends GameScreen implements Screen
 	 * then check whether the player has activated a portal.
 	 * We will also check for collisions with
 	 * the collision layer of the map, and if there are collisions, then we will not update
-	 * the player’s position. We make sure that we update the camera information in the
+	 * the player's position. We make sure that we update the camera information in the
 	 * OrthogonalTiledMapRenderer object and then render the TiledMap object first
 	 * because, as mentioned previously, the order in which you draw your objects matter.
 	 * Finally, we will draw the character to the screen, making sure to use the getBatch()
@@ -100,7 +100,7 @@ public class MainGameScreen extends GameScreen implements Screen
 		Gdx.gl.glClearColor(0, 0, 0, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		
-		//Preferable to lock and center the _camera to the player’s position
+		//Preferable to lock and center the _camera to the player's position
 		_camera.position.set(_currentPlayerSprite.getX(), _currentPlayerSprite.getY(), 0f);
 		_camera.update();
 		
@@ -201,8 +201,8 @@ public class MainGameScreen extends GameScreen implements Screen
 	
 	/**
 	 * This method is called for every frame in the render()
-	 * method with the player character’s bounding box passed in. This is essentially the
-	 * rectangle that defines the hitbox of the player. We test the player’s hitbox against
+	 * method with the player character's bounding box passed in. This is essentially the
+	 * rectangle that defines the hitbox of the player. We test the player's hitbox against
 	 * all rectangle objects on the collision layer of the TiledMap map, and if any of the
 	 * rectangles overlap, then we know we have a collision and will return true
 	 * @param boundingBox
@@ -231,7 +231,7 @@ public class MainGameScreen extends GameScreen implements Screen
 	/**
 	 * The method is similar to the isCollisionWithMapLayer(),
 	 *  in that we will walk through every rectangle on the
-	 *  portal layer checking for collisions with the player’s hitbox. The primary difference
+	 *  portal layer checking for collisions with the player's hitbox. The primary difference
 	 *  is that if a player walks over these special areas on the map, then an event will be
 	 *  triggered letting us know that the player has activated the portal. When portal
 	 *  activation occurs, we will first cache the closest player spawn in the MapManager
@@ -261,7 +261,7 @@ public class MainGameScreen extends GameScreen implements Screen
 					_mapMgr.setClosestStartPositionFromScaledUnits(_player.getCurrentPosition());
 					_mapMgr.loadMap(mapName);
 					_player.init(_mapMgr.getPlayerStartUnitScaled().x,
-							_mapMgr.getPlayerStartUnitScaled.y);
+							_mapMgr.getPlayerStartUnitScaled().y);
 					_mapRenderer.setMap(_mapMgr.getCurrentMap());
 					Gdx.app.debug(TAG, "Portal Activated");
 					return true;
