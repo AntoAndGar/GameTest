@@ -29,22 +29,23 @@ public class EntityFactory {
 	public static String PLAYER_CONFIG = "scripts/player.json";
 
 	static public Entity getEntity(EntityType entityType) {
-		Entity entity = null;
-		switch (entityType) {
-		case PLAYER:
-			entity = new Entity(new PlayerInputComponent(), new PlayerPhysicsComponent(),
-					new PlayerGraphicsComponent());
-			entity.setEntityConfig(Entity.getEntityConfig(EntityFactory.PLAYER_CONFIG));
-			entity.sendMessage(Component.MESSAGE.LOAD_ANIMATIONS, _json.toJson(entity.getEntityConfig()));
-			return entity;
-		case DEMO_PLAYER:
-			entity = new Entity(new NPCInputComponent(), new PlayerPhysicsComponent(), new PlayerGraphicsComponent());
-			return entity;
-		case NPC:
-			entity = new Entity(new NPCInputComponent(), new NPCPhysicsComponent(), new NPCGraphicsComponent());
-			return entity;
-		default:
-			return null;
-		}
+//		Entity entity = null;
+//		switch (entityType) {
+//		case PLAYER:
+//			entity = new Entity(new PlayerInputComponent(), new PlayerPhysicsComponent(),
+//					new PlayerGraphicsComponent());
+//			entity.setEntityConfig(Entity.getEntityConfig(EntityFactory.PLAYER_CONFIG));
+//			entity.sendMessage(Component.MESSAGE.LOAD_ANIMATIONS, _json.toJson(entity.getEntityConfig()));
+//			return entity;
+//		case DEMO_PLAYER:
+//			entity = new Entity(new NPCInputComponent(), new PlayerPhysicsComponent(), new PlayerGraphicsComponent());
+//			return entity;
+//		case NPC:
+//			entity = new Entity(new NPCInputComponent(), new NPCPhysicsComponent(), new NPCGraphicsComponent());
+//			return entity;
+//		default:
+//			return null;
+//		}
+		return null;
 	}
 }
