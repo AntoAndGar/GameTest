@@ -1,12 +1,13 @@
 package com.mygdx.game.randomgames.screens;
 
-import com.badlogic.gdx.math.Vector2;
+import static com.mygdx.game.randomgames.screens.DragonCurveGenerator.Direction.LEFT;
+import static com.mygdx.game.randomgames.screens.DragonCurveGenerator.Direction.RIGHT;
 
-import java.util.Arrays;
 import java.util.Iterator;
 import java.util.LinkedList;
 
-import static com.mygdx.game.randomgames.screens.DragonCurveGenerator.Direction.*;
+import com.badlogic.gdx.math.Vector2;
+import com.mygdx.game.randomgames.customexceptions.DragonGeneratorException;
 
 public class DragonCurveGenerator {
 
@@ -14,7 +15,7 @@ public class DragonCurveGenerator {
         LEFT,
         RIGHT;
 
-        public static Vector2 turn(Vector2 heading, Direction turn){
+        public static Vector2 turn(Vector2 heading, Direction turn) throws DragonGeneratorException{
             Vector2 newHeading = new Vector2();
             switch (turn){
                 case LEFT:
@@ -24,30 +25,31 @@ public class DragonCurveGenerator {
                 case RIGHT:
                     newHeading.x = heading.y;
                     newHeading.y = -heading.x;
+                    break;
+                default:
+                	throw new DragonGeneratorException();
             }
             return newHeading;
         }
     }
 
-    static LinkedList<Direction> dragonTurns(int recursions) {
+    private static LinkedList<Direction> dragonTurns(int recursions) {
         LinkedList<Direction> turns = new LinkedList<Direction>();
         turns.add(LEFT);
 
         for (int i = 0; i < recursions; i++){
             // TODO: Create a reversed copy of turns
             LinkedList<Direction> cpyTurns = new LinkedList<Direction>();
-            Iterator it = turns.descendingIterator();
+            Iterator<Direction> it = turns.descendingIterator();
             while(it.hasNext())
                 cpyTurns.add((Direction) it.next());
 
-            // TODO: Add a left turn to turns
             turns.add(LEFT);
 
-            // TODO: Add reflected version of reversed to turns
             for(Direction dir : cpyTurns) {
                 try {
                     turns.add(reflect(dir));
-                } catch(Exception e) {
+                } catch(DragonGeneratorException e) {
                     System.out.println("impossibruuu the direction provided not exists");
                     e.printStackTrace();
                 }
@@ -57,18 +59,18 @@ public class DragonCurveGenerator {
         return turns;
     }
 
-    static Direction reflect(Direction dir) throws Exception {
+    private static Direction reflect(Direction dir) throws DragonGeneratorException {
         switch (dir) {
             case LEFT:
                 return RIGHT;
             case RIGHT:
                 return LEFT;
             default:
-                throw new Exception();
+                throw new DragonGeneratorException();
         }
     }
 
-    public static float[] generateDragonCurve(int width, int height, int recursions){
+    public static float[] generateDragonCurve(int width, int height, int recursions) throws DragonGeneratorException{
 
         LinkedList<Direction> turns = DragonCurveGenerator.dragonTurns(recursions);
         System.out.println(turns);
@@ -82,7 +84,6 @@ public class DragonCurveGenerator {
         curve[i++] = head.x;
         curve[i++] = head.y;
 
-        //TODO: Convert the list of turns into the actual path
         for (Direction turn : turns){
             heading = Direction.turn(heading, turn);
             head.x += heading.x;

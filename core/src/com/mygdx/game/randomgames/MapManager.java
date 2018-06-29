@@ -64,8 +64,6 @@ public class MapManager {
 		_playerStartPositionRect = new Vector2(0,0);
 		_closestPlayerStartPosition = new Vector2(0,0);
 		_convertedUnits = new Vector2(0,0);
-		
-		
 	}
 	
 	/**
