@@ -14,18 +14,21 @@ import com.badlogic.gdx.utils.Array;
 
 public class LogoScreen extends InputAdapter implements Screen {
 
-    SpriteBatch batch;
-    Texture logo;
-    ParticleEffectPool touchEffectPool;
-    Array<PooledEffect> effects = new Array<PooledEffect>();
+	public static final String TAG = LogoScreen.class.getName();
+	
+    private SpriteBatch batch;
+    private Texture logo;
+    private ParticleEffectPool touchEffectPool;
+    private Array<PooledEffect> effects = new Array<PooledEffect>();
 
-    private static final Color MY_ORANGE = new Color(228.0f / 225.0f, 127.0f / 225.0f, 57.0f / 225.0f, 1.0f);
+    //private static final Color MY_ORANGE = new Color(228.0f / 225.0f, 127.0f / 225.0f, 57.0f / 225.0f, 1.0f);
     private static final Color MY_BLUE = new Color(36.0f / 225.0f, 73.0f / 225.0f, 96.0f / 225.0f, 1.0f);
-    private static final float LOGO_WIDTH = 400.0f;
+    private static final float LOGO_WIDTH = 500.0f;
     private float logoHeight;
 
     @Override
     public void show() {
+    	Gdx.app.log(TAG, "method show called");
         batch = new SpriteBatch();
         logo = new Texture("logo2.jpg");
         logoHeight = logo.getHeight() * LOGO_WIDTH / logo.getWidth();
@@ -39,6 +42,7 @@ public class LogoScreen extends InputAdapter implements Screen {
 
     @Override
     public void render(float delta) {
+    	Gdx.app.log(TAG, "method render(float delta) called");
         clearScreen(MY_BLUE);
 
         batch.begin();
@@ -98,11 +102,13 @@ public class LogoScreen extends InputAdapter implements Screen {
 
     @Override
     public void hide() {
-
+    	Gdx.app.log(TAG, "method hide called");
+    	dispose();
     }
 
     @Override
     public void dispose() {
+    	Gdx.app.log(TAG, "method dispose called");
         batch.dispose();
         logo.dispose();
         for (int i = effects.size - 1; i >= 0; i--)

@@ -9,6 +9,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
+import com.mygdx.game.randomgames.customexceptions.AnimationException;
 
 /**
  * Will represent the primary class for our player character in the game.
@@ -57,11 +58,11 @@ public class Entity {
 		UP,RIGHT,DOWN,LEFT;
 	}
 	
-	public Entity(){
+	public Entity() throws AnimationException{
 		initEntity();
 	}
 	
-	public void initEntity(){
+	public void initEntity() throws AnimationException{
 		this._entityID = UUID.randomUUID().toString();
 		this._nextPlayerPosition = new Vector2();
 		this._currentPlayerPosition = new Vector2();
@@ -171,8 +172,9 @@ public class Entity {
 	 * We can render these objects since each TextureRegion references
 	 * a specific subregion of the Texture. We can then take these arrays of TextureRegion
 	 * objects and create four Animation objects, for each of the four cardinal directions
+	 * @throws AnimationException 
 	 */
-	private void loadAllAnimations(){
+	private void loadAllAnimations() throws AnimationException{
 		//Walking animation
 		Texture texture = Utility.getTextureAsset(_defaultSpritePath);
 		TextureRegion[][] textureFrames = TextureRegion.split(texture, FRAME_WIDTH, FRAME_HEIGHT);
@@ -200,6 +202,8 @@ public class Entity {
 				case 3:
 					_walkUpFrames.insert(j, region);
 					break;
+				default:
+					throw new AnimationException();
 				}
 			}
 		}

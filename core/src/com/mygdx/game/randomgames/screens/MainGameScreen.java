@@ -14,6 +14,7 @@ import com.badlogic.gdx.math.Rectangle;
 import com.mygdx.game.randomgames.Entity;
 import com.mygdx.game.randomgames.MapManager;
 import com.mygdx.game.randomgames.PlayerController;
+import com.mygdx.game.randomgames.customexceptions.AnimationException;
 
 /**
  * Will be the primary gameplay screen that displays 
@@ -25,6 +26,16 @@ import com.mygdx.game.randomgames.PlayerController;
 public class MainGameScreen extends GameScreen implements Screen
 {
 	private static final String TAG = MainGameScreen.class.getSimpleName();
+
+	private PlayerController _controller;
+	private TextureRegion _currentPlayerFrame;
+	private Sprite _currentPlayerSprite;
+	
+	private OrthogonalTiledMapRenderer _mapRenderer = null;
+	private OrthographicCamera _camera = null;
+	private static MapManager _mapMgr;
+	
+	private static Entity _player;
 	
 	private static class VIEWPORT {
 		static float viewportWidth;
@@ -36,19 +47,10 @@ public class MainGameScreen extends GameScreen implements Screen
 		static float aspectRatio;
 	}
 	
-	private PlayerController _controller;
-	private TextureRegion _currentPlayerFrame;
-	private Sprite _currentPlayerSprite;
-	
-	private OrthogonalTiledMapRenderer _mapRenderer = null;
-	private OrthographicCamera _camera = null;
-	private static MapManager _mapMgr;
 	
 	public MainGameScreen(){
-		_mapMgr = new MapManager();
+		MainGameScreen._mapMgr = new MapManager();
 	}
-	
-	private static Entity _player;
 	
 	/**
 	 * show the new screen
@@ -68,14 +70,19 @@ public class MainGameScreen extends GameScreen implements Screen
 		
 		Gdx.app.debug(TAG, "UnitScale value is: " + _mapRenderer.getUnitScale());
 		
-		_player = new Entity();
-		_player.init(_mapMgr.getPlayerStartUnitScaled().x, _mapMgr.getPlayerStartUnitScaled().y);
-		
-		_currentPlayerSprite =_player.getFrameSprite();
-		
-		_controller = new PlayerController(_player);
-		Gdx.input.setInputProcessor(_controller);
-		
+		try {
+			_player = new Entity();
+			_player.init(_mapMgr.getPlayerStartUnitScaled().x, _mapMgr.getPlayerStartUnitScaled().y);
+			
+			_currentPlayerSprite =_player.getFrameSprite();
+			
+			_controller = new PlayerController(_player);
+			Gdx.input.setInputProcessor(_controller);
+			
+		} catch (AnimationException e) {
+			e.printStackTrace();
+		}
+
 	}
 
 	/**
@@ -107,9 +114,9 @@ public class MainGameScreen extends GameScreen implements Screen
 		_player.update(delta);
 		_currentPlayerFrame = _player.getFrame();
 		
-		updatePortalLayerActivation(_player.boundingBox);
+		updatePortalLayerActivation(Entity.boundingBox);
 		
-		if( !isCollisionWithMapLayer(_player.boundingBox) ) 
+		if( !isCollisionWithMapLayer(Entity.boundingBox) ) 
 			_player.setNextPositionToCurrent();
 		_controller.update(delta);
 		
